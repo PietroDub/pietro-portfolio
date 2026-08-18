@@ -1,55 +1,109 @@
 "use client";
 
-import { Text } from "@react-three/drei";
+import CodeEdge from "./CodeEdge";
 
-const code = [
-  "<section>",
-  "const app = createApp()",
-  "return (",
-  "  <Hero />",
-  ")",
-  "</section>",
-];
+const code = {
+  horizontal: ["<div>", "const", "=>", "{}", "</div>"],
+  vertical: ["{", "useState", "=>", "}"],
+  depth: ["//", "React", "TS", "//"],
+};
 
 export default function CodeStructure() {
+  const s = 1.2;
+
   return (
     <group>
-      {/* FRONT */}
-      {code.map((line, index) => (
-        <Text
-          key={`front-${index}`}
-          position={[
-            -0.85,
-            0.75 - index * 0.25,
-            1,
-          ]}
-          fontSize={0.12}
-          color="#ff2f3f"
-          anchorX="left"
-          anchorY="middle"
-        >
-          {line}
-        </Text>
-      ))}
+      {/* ========================= */}
+      {/* BACK / FRONT HORIZONTAL */}
+      {/* ========================= */}
 
-      {/* RIGHT */}
-      {code.map((line, index) => (
-        <Text
-          key={`right-${index}`}
-          position={[
-            1,
-            0.75 - index * 0.25,
-            0.85,
-          ]}
-          rotation={[0, Math.PI / 2, 0]}
-          fontSize={0.12}
-          color="#ff2f3f"
-          anchorX="left"
-          anchorY="middle"
-        >
-          {line}
-        </Text>
-      ))}
+      <CodeEdge
+        start={[-s, s, s]}
+        end={[s, s, s]}
+        code={code.horizontal}
+      />
+
+      <CodeEdge
+        start={[-s, -s, s]}
+        end={[s, -s, s]}
+        code={code.horizontal}
+      />
+
+      <CodeEdge
+        start={[-s, s, -s]}
+        end={[s, s, -s]}
+        code={code.horizontal}
+      />
+
+      <CodeEdge
+        start={[-s, -s, -s]}
+        end={[s, -s, -s]}
+        code={code.horizontal}
+      />
+
+      {/* ========================= */}
+      {/* VERTICAL */}
+      {/* ========================= */}
+
+      <CodeEdge
+        start={[-s, -s, s]}
+        end={[-s, s, s]}
+        code={code.vertical}
+        rotation={[0, 0, Math.PI / 2]}
+      />
+
+      <CodeEdge
+        start={[s, -s, s]}
+        end={[s, s, s]}
+        code={code.vertical}
+        rotation={[0, 0, Math.PI / 2]}
+      />
+
+      <CodeEdge
+        start={[-s, -s, -s]}
+        end={[-s, s, -s]}
+        code={code.vertical}
+        rotation={[0, 0, Math.PI / 2]}
+      />
+
+      <CodeEdge
+        start={[s, -s, -s]}
+        end={[s, s, -s]}
+        code={code.vertical}
+        rotation={[0, 0, Math.PI / 2]}
+      />
+
+      {/* ========================= */}
+      {/* DEPTH */}
+      {/* ========================= */}
+
+      <CodeEdge
+        start={[-s, s, -s]}
+        end={[-s, s, s]}
+        code={code.depth}
+        rotation={[0, Math.PI / 2, 0]}
+      />
+
+      <CodeEdge
+        start={[s, s, -s]}
+        end={[s, s, s]}
+        code={code.depth}
+        rotation={[0, Math.PI / 2, 0]}
+      />
+
+      <CodeEdge
+        start={[-s, -s, -s]}
+        end={[-s, -s, s]}
+        code={code.depth}
+        rotation={[0, Math.PI / 2, 0]}
+      />
+
+      <CodeEdge
+        start={[s, -s, -s]}
+        end={[s, -s, s]}
+        code={code.depth}
+        rotation={[0, Math.PI / 2, 0]}
+      />
     </group>
   );
 }

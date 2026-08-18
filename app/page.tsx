@@ -4,16 +4,18 @@ import Image from "next/image";
 import SocialLinks from "@/components/layout/SocialLinks";
 import CodeCube from "@/components/three/CodeCube";
 import TextAbout from "@/components/AboutMe/TextAbout";
+import ImageProfile from "@/components/AboutMe/ImageProfile";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black gap-y-10">
       <Navbar />
-      <div className="flex w-full items-center justify-centergap-0 px-0">
+      <div className="flex w-full items-center justify-center gap-0 px-0 min-h-screen">
         <Hero />
         <CodeCube />
       </div>
-      <div className="w-full">
+      <div className="flex flex-col md:flex-row w-full items-center justify-center gap-10 px-0">
+        <ImageProfile />
         <TextAbout />
       </div>  
       <SocialLinks />

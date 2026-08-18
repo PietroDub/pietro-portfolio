@@ -5,28 +5,14 @@ import CodeCubeMesh from "./CodeCubeMesh";
 
 export default function CodeCube() {
   return (
-    <div className="h-[500px] w-full">
+    <div className="hidden h-[500px] w-1/2 items-center justify-center md:flex">
       <Canvas
+        className="h-full w-full"
         camera={{
-          position: [3.2, 2.5, 4.5],
-          fov: 40,
+          position: [3.5, 3, 5],
+          fov: 42,
         }}
       >
-        {/* Iluminação */}
-        <ambientLight intensity={1.2} />
-
-        <directionalLight
-          position={[4, 5, 4]}
-          intensity={2}
-        />
-
-        <pointLight
-          position={[-3, 2, 3]}
-          color="#ff2f3f"
-          intensity={5}
-        />
-
-        {/* Cubo */}
         <CodeCubeMesh />
       </Canvas>
     </div>

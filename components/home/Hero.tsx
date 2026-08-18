@@ -1,7 +1,8 @@
 export default function Hero () {
   return (
-    <section className="flex w-full md:w-1/2 flex-col px-14 pt-20">
-  <p className="font-mono text-base text-[#ff2f3f]">
+    <section className="flex w-full md:w-1/2 flex-col items-end px-14 pt-20 ">
+      <div className="flex flex-col w-auto items-center justify-center gap-2">
+        <p className="font-mono text-base text-[#ff2f3f]">
     Hi my name is
   </p>
 
@@ -82,6 +83,7 @@ export default function Hero () {
     Let&apos;s Work!
   </button>
   </div>
-</section>
+      </div>
+    </section>
   )
 }
