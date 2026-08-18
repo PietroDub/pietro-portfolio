@@ -1,42 +1,24 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Text } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
-import CodeFace from "./CodeFaces";
+
+import CodeStructure from "./CodeStructure";
 
 export default function CodeCubeMesh() {
-  const cubeRef = useRef<THREE.Mesh>(null);
+  const cubeRef = useRef<THREE.Group>(null);
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (!cubeRef.current) return;
 
-    cubeRef.current.rotation.y += delta * 0.25;
-    cubeRef.current.rotation.x += delta * 0.08;
+    cubeRef.current.rotation.y += delta * 0.15;
+    cubeRef.current.rotation.x += delta * 0.04;
   });
 
   return (
-    <group>
-      <mesh ref={cubeRef}>
-        <boxGeometry args={[2, 2, 2]} />
-
-        <meshStandardMaterial
-          color="#ff2f3f"
-          roughness={0.7}
-          metalness={0.05}
-        />
-      </mesh>
-
-      <CodeFace
-        position={[0, 0, 1]}
-        rotation={[0, 0, 0]}
-        lines={[
-          "function hello() {",
-          "  console.log('Hello, World!');",
-          "}"
-        ]}
-      />
+    <group ref={cubeRef}>
+      <CodeStructure />
     </group>
   );
 }

@@ -3,6 +3,7 @@ import Hero from "@/components/home/Hero";
 import Image from "next/image";
 import SocialLinks from "@/components/layout/SocialLinks";
 import CodeCube from "@/components/three/CodeCube";
+import TextAbout from "@/components/AboutMe/TextAbout";
 
 export default function Home() {
   return (
@@ -12,6 +13,9 @@ export default function Home() {
         <Hero />
         <CodeCube />
       </div>
+      <div className="w-full">
+        <TextAbout />
+      </div>  
       <SocialLinks />
     </div>
   );

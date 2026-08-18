@@ -1,35 +1,33 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Text } from "@react-three/drei";
-import { useRef } from "react";
-import * as THREE from "three";
+import { Canvas } from "@react-three/fiber";
 import CodeCubeMesh from "./CodeCubeMesh";
 
 export default function CodeCube() {
   return (
-    <div className="h-[500px] w-1/2">
+    <div className="h-[500px] w-full">
       <Canvas
         camera={{
-          position: [3, 2.5, 4],
-          fov: 45,
+          position: [3.2, 2.5, 4.5],
+          fov: 40,
         }}
       >
-        <ambientLight intensity={1.5} />
+        {/* Iluminação */}
+        <ambientLight intensity={1.2} />
 
         <directionalLight
-          position={[4, 5, 3]}
-          intensity={3}
+          position={[4, 5, 4]}
+          intensity={2}
         />
 
+        <pointLight
+          position={[-3, 2, 3]}
+          color="#ff2f3f"
+          intensity={5}
+        />
+
+        {/* Cubo */}
         <CodeCubeMesh />
-
-        <OrbitControls
-          enableZoom={false}
-          enablePan={false}
-          autoRotate
-          autoRotateSpeed={1.5}
-        />
       </Canvas>
     </div>
   );
