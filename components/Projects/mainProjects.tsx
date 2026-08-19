@@ -149,79 +149,100 @@ export default function MainProjects() {
       </h2>
 
       {/* Carrossel */}
-      <div
-        className="
-          mt-10
-          flex
-          w-full
-          items-center
-          justify-center
-          gap-4
-          overflow-hidden
-          md:gap-8
-          lg:gap-12
-        "
-      >
-        <ButtonLeft onClick={handlePrevious} />
+<div
+  className="
+    relative
+    mt-10
+    flex
+    w-full
+    items-center
+    justify-center
+    gap-4
+    overflow-hidden
+    md:static
+    md:gap-8
+    lg:gap-12
+  "
+>
+  {/* Seta esquerda */}
+  <div
+    className="
+      absolute
+      left-0
+      z-20
+      md:static
+    "
+  >
+    <ButtonLeft onClick={handlePrevious} />
+  </div>
 
-        {/* Projeto anterior */}
-        <div className="hidden md:block">
-          <ProjectPreview
-            key={`previous-${previousProject.title}`}
-            project={previousProject}
-            variant="side"
-            direction={direction}
-          />
-        </div>
+  {/* Projeto anterior */}
+  <div className="hidden md:block">
+    <ProjectPreview
+      key={`previous-${previousProject.title}`}
+      project={previousProject}
+      variant="side"
+      direction={direction}
+    />
+  </div>
 
-        {/* Projeto atual */}
-        <ProjectPreview
-          key={`current-${currentProject.title}`}
-          project={currentProject}
-          variant="active"
-          direction={direction}
-        />
+  {/* Projeto atual */}
+  <ProjectPreview
+    key={`current-${currentProject.title}`}
+    project={currentProject}
+    variant="active"
+    direction={direction}
+  />
 
-        {/* Próximo projeto */}
-        <div className="hidden md:block">
-          <ProjectPreview
-            key={`next-${nextProject.title}`}
-            project={nextProject}
-            variant="side"
-            direction={direction}
-          />
-        </div>
+  {/* Próximo projeto */}
+  <div className="hidden md:block">
+    <ProjectPreview
+      key={`next-${nextProject.title}`}
+      project={nextProject}
+      variant="side"
+      direction={direction}
+    />
+  </div>
 
-        <ButtonRight onClick={handleNext} />
-      </div>
+  {/* Seta direita */}
+  <div
+    className="
+      absolute
+      right-0
+      z-20
+      md:static
+    "
+  >
+    <ButtonRight onClick={handleNext} />
+  </div>
+</div>
+{/* Informações */}
+<ProjectInfo
+  key={currentProject.title}
+  project={currentProject}
+/>
 
-      {/* Informações */}
-      <ProjectInfo
-        key={currentProject.title}
-        project={currentProject}
-      />
-
-      {/* Indicadores */}
-      <div className="mt-6 flex justify-center gap-3">
-        {data.map((project, index) => (
-          <button
-            key={project.title}
-            onClick={() => handleSelect(index)}
-            aria-label={`Go to ${project.title}`}
-            className={`
-              h-3
-              rounded-full
-              transition-all
-              duration-300
-              ${
-                index === activeIndex
-                  ? "w-12 bg-[#ff2f3f]"
-                  : "w-8 bg-[#8f1111]"
-              }
-            `}
-          />
-        ))}
-      </div>
+{/* Indicadores */}
+<div className="mt-6 flex justify-center gap-3">
+  {data.map((project, index) => (
+    <button
+      key={project.title}
+      onClick={() => handleSelect(index)}
+      aria-label={`Go to ${project.title}`}
+      className={`
+        h-3
+        rounded-full
+        transition-all
+        duration-300
+        ${
+          index === activeIndex
+            ? "w-12 bg-[#ff2f3f]"
+            : "w-8 bg-[#8f1111]"
+        }
+      `}
+    />
+  ))}
+</div>
     </section>
   );
 }

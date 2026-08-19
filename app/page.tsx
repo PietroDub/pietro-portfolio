@@ -6,6 +6,7 @@ import CodeCube from "@/components/three/CodeCube";
 import TextAbout from "@/components/AboutMe/TextAbout";
 import ImageProfile from "@/components/AboutMe/ImageProfile";
 import MainProjects from "@/components/Projects/mainProjects";
+import MainCarrer from "@/components/Carrer/MainCarrer";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
         <TextAbout />
       </div>  
       <MainProjects />
+      <MainCarrer />
       <SocialLinks />
     </div>
   );
