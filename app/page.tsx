@@ -5,6 +5,7 @@ import SocialLinks from "@/components/layout/SocialLinks";
 import CodeCube from "@/components/three/CodeCube";
 import TextAbout from "@/components/AboutMe/TextAbout";
 import ImageProfile from "@/components/AboutMe/ImageProfile";
+import MainProjects from "@/components/Projects/mainProjects";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
         <ImageProfile />
         <TextAbout />
       </div>  
+      <MainProjects />
       <SocialLinks />
     </div>
   );
