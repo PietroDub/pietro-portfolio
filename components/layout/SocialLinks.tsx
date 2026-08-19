@@ -8,17 +8,17 @@ import { FaPaperclip } from "react-icons/fa6";
 const socialLinks = [
   {
     name: "GitHub",
-    href: "https://github.com/",
+    href: "https://github.com/PietroDub",
     icon: FaGithub,
   },
   {
     name: "Instagram",
-    href: "https://instagram.com/",
+    href: "https://instagram.com/pietroviton/",
     icon: FaInstagram,
   },
   {
     name: "LinkedIn",
-    href: "https://linkedin.com/",
+    href: "https://linkedin.com/in/pietro-vito/",
     icon: FaLinkedinIn,
   },
   {
