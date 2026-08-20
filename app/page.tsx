@@ -7,10 +7,11 @@ import TextAbout from "@/components/AboutMe/TextAbout";
 import ImageProfile from "@/components/AboutMe/ImageProfile";
 import MainProjects from "@/components/Projects/mainProjects";
 import MainCarrer from "@/components/Carrer/MainCarrer";
+import MainContact from "@/components/Contact/MainContact";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black gap-y-10">
+    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black ">
       <Navbar />
       <div className="flex w-full items-center justify-center gap-0 px-0 min-h-screen">
         <Hero />
@@ -22,6 +23,7 @@ export default function Home() {
       </div>  
       <MainProjects />
       <MainCarrer />
+      <MainContact />
       <SocialLinks />
     </div>
   );
