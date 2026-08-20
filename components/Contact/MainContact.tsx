@@ -2,7 +2,7 @@ import Terminal from "./3DTerminal";
 
 export default function MainContact() {
   return (
-    <section className="flex w-full">
+    <section className="flex w-full" id="contact">
       <div className="w-full md:w-1/2 p-10 lg:px-20">
       <form
         action={`https://formspree.io/f/${process.env.NEXT_PUBLIC_FORMSPREE_ID}`}

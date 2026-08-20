@@ -1,6 +1,6 @@
 export default function TextAbout() {
   return (
-    <div className="flex w-full lg:w-1/2 max-w-xl flex-col p-15">
+    <div className="flex w-full lg:w-1/2 max-w-xl flex-col p-15" id="about">
       {/* Title */}
       <h2
         className="
@@ -77,8 +77,11 @@ export default function TextAbout() {
           dark:text-[#ff2f3f]
         "
       >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod
-        cupiditate tenetur ipsa quis natus incidunt.
+        I enjoy working across the stack, from building interfaces with
+React and Next.js to developing APIs and backend systems with C# and .NET.
+
+I'm constantly learning, experimenting with new technologies and
+looking for better ways to solve problems through code.
       </p>
     </div>
   );
