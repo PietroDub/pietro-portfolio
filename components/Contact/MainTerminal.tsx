@@ -117,7 +117,7 @@ export default function Terminal3D() {
 
 
       {/* ===================================== */}
-      {/* BORDA DA TELA */}
+      {/* BORDA DA TELA 1 */}
       {/* ===================================== */}
 
       <Line
