@@ -3,13 +3,19 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import { useLanguage } from "@/hooks/useLanguage";
+
 
 export default function LanguageSelector() {
   const [open, setOpen] = useState(false);
-  const [language, setLanguage] = useState<"en" | "pt">("en");
+  const { language, setLanguage } = useLanguage();
 
   function selectLanguage(value: "en" | "pt") {
     setLanguage(value);
+    setOpen(false);
+  }
+  function toggleLanguage() {
+    setLanguage(language === "en" ? "pt" : "en");
     setOpen(false);
   }
 
@@ -17,7 +23,7 @@ export default function LanguageSelector() {
     <div className="relative">
       <button
         type="button"
-        onClick={() => setOpen(!open)}
+        onClick={() => {setOpen(!open), toggleLanguage}}
         className="
           flex items-center gap-1.5
           font-mono text-sm

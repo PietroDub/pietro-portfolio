@@ -23,7 +23,7 @@ const socialLinks = [
   },
   {
     name: "Resume",
-    href: "#",
+    href: "/documents/CurrículoPietroVito.pdf",
     icon: FaPaperclip,
   },
 ];
@@ -75,6 +75,7 @@ export default function SocialLinks() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={name}
+      download={"PietroVito.pdf"}
       className="
         flex
         h-9
