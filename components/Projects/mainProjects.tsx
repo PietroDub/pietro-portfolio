@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import ButtonLeft from "./ButtonLeft";
 import ButtonRight from "./ButtonRight";
 import { Project } from "../../Types/Project";
@@ -84,9 +84,10 @@ const data: Project[] = [
 
 export default function MainProjects() {
   const [activeIndex, setActiveIndex] = useState(0);
-
-  // Guarda a direção da animação
   const [direction, setDirection] = useState<"next" | "prev">("next");
+
+  const touchStartX = useRef<number | null>(null);
+  // const touchEndX = useRef<number | null>(null);
 
   const previousIndex =
     (activeIndex - 1 + data.length) % data.length;
@@ -107,12 +108,41 @@ export default function MainProjects() {
   function handleSelect(index: number) {
     if (index === activeIndex) return;
 
-    setDirection(
-      index > activeIndex ? "next" : "prev"
-    );
-
+    setDirection(index > activeIndex ? "next" : "prev");
     setActiveIndex(index);
   }
+
+  /*
+   * =========================
+   * SWIPE MOBILE
+   * =========================
+   */
+
+function handleTouchStart(event: React.TouchEvent<HTMLDivElement>) {
+  touchStartX.current = event.touches[0].clientX;
+}
+
+function handleTouchEnd(event: React.TouchEvent<HTMLDivElement>) {
+  if (touchStartX.current === null) return;
+
+  const touchEndX = event.changedTouches[0].clientX;
+
+  const distance = touchStartX.current - touchEndX;
+
+  const minimumSwipeDistance = 50;
+
+  if (Math.abs(distance) >= minimumSwipeDistance) {
+    if (distance > 0) {
+      // Swipe para esquerda → próximo
+      handleNext();
+    } else {
+      // Swipe para direita → anterior
+      handlePrevious();
+    }
+  }
+
+  touchStartX.current = null;
+}
 
   const previousProject = data[previousIndex];
   const currentProject = data[activeIndex];
@@ -148,101 +178,119 @@ export default function MainProjects() {
         Projects:
       </h2>
 
-      {/* Carrossel */}
-<div
-  className="
-    relative
-    mt-10
-    flex
-    w-full
-    items-center
-    justify-center
-    gap-4
-    overflow-hidden
-    md:static
-    md:gap-8
-    lg:gap-12
-  "
->
-  {/* Seta esquerda */}
-  <div
-    className="
-      absolute
-      left-0
-      z-20
-      md:static
-    "
-  >
-    <ButtonLeft onClick={handlePrevious} />
-  </div>
+      {/* =========================
+          CARROSSEL
+          ========================= */}
+      <div
+        style={{ touchAction: "pan-y" }}
+        className="
+          relative
+          mt-10
+          flex
+          w-full
+          items-center
+          justify-center
+          overflow-hidden
 
-  {/* Projeto anterior */}
-  <div className="hidden md:block">
-    <ProjectPreview
-      key={`previous-${previousProject.title}`}
-      project={previousProject}
-      variant="side"
-      direction={direction}
-    />
-  </div>
+          md:overflow-visible
+          lg:mt-14
+        "
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
+        {/* Seta esquerda */}
+        <div
+          className="
+            absolute
+            left-1
+            top-1/2
+            z-30
+            -translate-y-1/2
 
-  {/* Projeto atual */}
-  <ProjectPreview
-    key={`current-${currentProject.title}`}
-    project={currentProject}
-    variant="active"
-    direction={direction}
-  />
+            md:left-0
+            lg:-left-4
+          "
+        >
+          <ButtonLeft onClick={handlePrevious} />
+        </div>
 
-  {/* Próximo projeto */}
-  <div className="hidden md:block">
-    <ProjectPreview
-      key={`next-${nextProject.title}`}
-      project={nextProject}
-      variant="side"
-      direction={direction}
-    />
-  </div>
+        {/* Projeto anterior */}
+        <div className="hidden md:block">
+          <ProjectPreview
+            key={`previous-${previousProject.title}`}
+            project={previousProject}
+            variant="side"
+            direction={direction}
+          />
+        </div>
 
-  {/* Seta direita */}
-  <div
-    className="
-      absolute
-      right-0
-      z-20
-      md:static
-    "
-  >
-    <ButtonRight onClick={handleNext} />
-  </div>
-</div>
-{/* Informações */}
-<ProjectInfo
-  key={currentProject.title}
-  project={currentProject}
-/>
+        {/* Projeto atual */}
+        <ProjectPreview
+          key={`current-${currentProject.title}`}
+          project={currentProject}
+          variant="active"
+          direction={direction}
+        />
 
-{/* Indicadores */}
-<div className="mt-6 flex justify-center gap-3">
-  {data.map((project, index) => (
-    <button
-      key={project.title}
-      onClick={() => handleSelect(index)}
-      aria-label={`Go to ${project.title}`}
-      className={`
-        h-3
-        rounded-full
-        transition-all
-        duration-300
-        ${
-          index === activeIndex
-            ? "w-12 bg-[#ff2f3f]"
-            : "w-8 bg-[#8f1111]"
-        }
-      `}
-    />
-  ))}
-</div>
+        {/* Próximo projeto */}
+        <div className="hidden md:block">
+          <ProjectPreview
+            key={`next-${nextProject.title}`}
+            project={nextProject}
+            variant="side"
+            direction={direction}
+          />
+        </div>
+
+        {/* Seta direita */}
+        <div
+          className="
+            absolute
+            right-1
+            top-1/2
+            z-30
+            -translate-y-1/2
+
+            md:right-0
+            lg:-right-4
+          "
+        >
+          <ButtonRight onClick={handleNext} />
+        </div>
+      </div>
+
+      {/* =========================
+          INFORMAÇÕES
+          ========================= */}
+      <ProjectInfo
+        key={currentProject.title}
+        project={currentProject}
+      />
+
+      {/* =========================
+          INDICADORES
+          ========================= */}
+      <div className="mt-6 flex justify-center gap-3">
+        {data.map((project, index) => (
+          <button
+            key={project.title}
+            onClick={() => handleSelect(index)}
+            aria-label={`Go to ${project.title}`}
+            className={`
+              h-3
+              rounded-full
+              transition-all
+              duration-300
+
+              ${
+                index === activeIndex
+                  ? "w-12 bg-[#ff2f3f]"
+                  : "w-8 bg-[#8f1111]"
+              }
+            `}
+          />
+        ))}
+      </div>
     </section>
   );
 }
