@@ -1,6 +1,5 @@
 export type Project = {
   title: string;
-  description: string;
   image: string;
   technologies: string[];
   status: "live" | "source";
@@ -13,6 +12,11 @@ export type Project = {
   };
 };
 
+
+export type ProjectWithTranslation = Project & {
+  description: string;
+};
+
 export type ProjectInfoProps = {
-  project: Project;
+  project: ProjectWithTranslation;
 };

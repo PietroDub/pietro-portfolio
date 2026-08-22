@@ -1,4 +1,10 @@
+"use client";
+
+import { useLanguage } from "@/hooks/useLanguage";
+
 export default function TextAbout() {
+  const { translations } = useLanguage();
+  
   return (
     <div className="flex w-full lg:w-1/2 max-w-xl flex-col p-15" id="about">
       {/* Title */}
@@ -15,7 +21,7 @@ export default function TextAbout() {
           md:text-4xl
         "
       >
-        ABOUT ME
+        {translations.about.title}
       </h2>
 
       {/* Name */}
@@ -35,7 +41,7 @@ export default function TextAbout() {
             lg:text-8xl
           "
         >
-          PIETRO
+          {translations.about.name1}
         </h1>
 
         <h2
@@ -55,7 +61,7 @@ export default function TextAbout() {
             lg:text-8xl
           "
         >
-          VITO
+          {translations.about.name2}
         </h2>
       </div>
 
@@ -77,11 +83,7 @@ export default function TextAbout() {
           dark:text-[#ff2f3f]
         "
       >
-        I enjoy working across the stack, from building interfaces with
-React and Next.js to developing APIs and backend systems with C# and .NET.
-
-I'm constantly learning, experimenting with new technologies and
-looking for better ways to solve problems through code.
+        {translations.about.description}
       </p>
     </div>
   );

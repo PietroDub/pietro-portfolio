@@ -1,5 +1,3 @@
-// hooks/useLanguage.ts
-
 "use client";
 
 import { useContext } from "react";

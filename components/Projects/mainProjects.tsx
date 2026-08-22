@@ -6,19 +6,13 @@ import ButtonRight from "./ButtonRight";
 import { Project } from "../../Types/Project";
 import ProjectPreview from "./ProjectPreview";
 import { ProjectInfo } from "./ProjectInfo";
+import { useLanguage } from "@/hooks/useLanguage";
 
 const data: Project[] = [
   {
     title: "AnimeHub",
-    description:
-      "Full-stack platform for managing anime lists, ratings, favorites and watching progress.",
     image: "/projects/animehub.png",
-    technologies: [
-      "Next.js",
-      "TypeScript",
-      ".NET",
-      "MongoDB",
-    ],
+    technologies: ["Next.js", "TypeScript", ".NET", "MongoDB"],
     status: "live",
     links: {
       github: "GITHUB_ANIMEHUB_FRONT",
@@ -30,15 +24,8 @@ const data: Project[] = [
 
   {
     title: "DampCode",
-    description:
-      "Web application developed with React and a .NET backend.",
     image: "/projects/dampcode.png",
-    technologies: [
-      "React",
-      "TypeScript",
-      ".NET",
-      "MongoDB",
-    ],
+    technologies: ["React", "TypeScript", ".NET", "MongoDB"],
     status: "source",
     links: {
       github: "GITHUB_DAMPCODE_FRONT",
@@ -48,15 +35,8 @@ const data: Project[] = [
 
   {
     title: "FogoBaixo",
-    description:
-      "Interactive recipe platform focused on healthy and personalized food experiences.",
     image: "/projects/fogobaixo.png",
-    technologies: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "Tailwind",
-    ],
+    technologies: ["HTML", "CSS", "JavaScript", "Tailwind"],
     status: "source",
     links: {
       github: "GITHUB_FOGOBAIXA",
@@ -65,15 +45,8 @@ const data: Project[] = [
 
   {
     title: "Portfolio",
-    description:
-      "Personal portfolio focused on development, projects and technical skills.",
     image: "/projects/Portfolio (1).png",
-    technologies: [
-      "Next.js",
-      "TypeScript",
-      "Tailwind",
-      "Three.js",
-    ],
+    technologies: ["Next.js", "TypeScript", "Tailwind", "Three.js"],
     status: "live",
     links: {
       github: "GITHUB_PORTFOLIO",
@@ -89,11 +62,9 @@ export default function MainProjects() {
   const touchStartX = useRef<number | null>(null);
   // const touchEndX = useRef<number | null>(null);
 
-  const previousIndex =
-    (activeIndex - 1 + data.length) % data.length;
+  const previousIndex = (activeIndex - 1 + data.length) % data.length;
 
-  const nextIndex =
-    (activeIndex + 1) % data.length;
+  const nextIndex = (activeIndex + 1) % data.length;
 
   function handlePrevious() {
     setDirection("prev");
@@ -118,98 +89,103 @@ export default function MainProjects() {
    * =========================
    */
 
-function handleTouchStart(event: React.TouchEvent<HTMLDivElement>) {
-  touchStartX.current = event.touches[0].clientX;
-}
-
-function handleTouchEnd(event: React.TouchEvent<HTMLDivElement>) {
-  if (touchStartX.current === null) return;
-
-  const touchEndX = event.changedTouches[0].clientX;
-
-  const distance = touchStartX.current - touchEndX;
-
-  const minimumSwipeDistance = 50;
-
-  if (Math.abs(distance) >= minimumSwipeDistance) {
-    if (distance > 0) {
-      // Swipe para esquerda → próximo
-      handleNext();
-    } else {
-      // Swipe para direita → anterior
-      handlePrevious();
-    }
+  function handleTouchStart(event: React.TouchEvent<HTMLDivElement>) {
+    touchStartX.current = event.touches[0].clientX;
   }
 
-  touchStartX.current = null;
-}
+  function handleTouchEnd(event: React.TouchEvent<HTMLDivElement>) {
+    if (touchStartX.current === null) return;
+
+    const touchEndX = event.changedTouches[0].clientX;
+
+    const distance = touchStartX.current - touchEndX;
+
+    const minimumSwipeDistance = 50;
+
+    if (Math.abs(distance) >= minimumSwipeDistance) {
+      if (distance > 0) {
+        // Swipe para esquerda → próximo
+        handleNext();
+      } else {
+        // Swipe para direita → anterior
+        handlePrevious();
+      }
+    }
+
+    touchStartX.current = null;
+  }
+  const { translations } = useLanguage();
 
   const previousProject = data[previousIndex];
   const currentProject = data[activeIndex];
   const nextProject = data[nextIndex];
 
+  const currentProjectTranslated = {
+    ...currentProject,
+    title: translations.projects.items[activeIndex].title,
+    description: translations.projects.items[activeIndex].description,
+  };
+
   return (
     <section
       id="projects"
       className="
-        relative
-        flex
-        min-h-screen
-        w-full
-        flex-col
-        px-6
-        pt-28
-        md:px-12
-        lg:px-20
-      "
+      relative
+      flex
+      min-h-screen
+      w-full
+      flex-col
+      px-6
+      pt-28
+      md:px-12
+      lg:px-20
+    "
     >
       {/* Título */}
       <h2
         className="
-          font-sans
-          text-4xl
-          font-bold
-          uppercase
-          text-[#ff2f3f]
-          drop-shadow-[2px_2px_0px_#8f1111]
-          md:text-5xl
-        "
+        font-sans
+        text-4xl
+        font-bold
+        uppercase
+        text-[#ff2f3f]
+        drop-shadow-[2px_2px_0px_#8f1111]
+        md:text-5xl
+      "
       >
-        Projects:
+        {translations.projects.title}
       </h2>
 
       {/* =========================
-          CARROSSEL
-          ========================= */}
+        CARROSSEL
+        ========================= */}
       <div
         style={{ touchAction: "pan-y" }}
         className="
-          relative
-          mt-10
-          flex
-          w-full
-          items-center
-          justify-center
-          overflow-hidden
-
-          md:overflow-visible
-          lg:mt-14
-        "
+        relative
+        mt-10
+        flex
+        w-full
+        items-center
+        justify-center
+        overflow-hidden
+        md:overflow-visible
+        lg:mt-14
+      "
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
         {/* Seta esquerda */}
         <div
           className="
-            absolute
-            left-1
-            top-1/2
-            z-30
-            -translate-y-1/2
-
-            md:left-0
-            lg:-left-4
-          "
+          absolute
+          left-1
+          top-1/2
+          z-30
+          -translate-y-1/2
+          md:left-0
+          lg:-left-4
+        "
         >
           <ButtonLeft onClick={handlePrevious} />
         </div>
@@ -227,7 +203,10 @@ function handleTouchEnd(event: React.TouchEvent<HTMLDivElement>) {
         {/* Projeto atual */}
         <ProjectPreview
           key={`current-${currentProject.title}`}
-          project={currentProject}
+          project={{
+            ...currentProject,
+            title: translations.projects.items[activeIndex].title,
+          }}
           variant="active"
           direction={direction}
         />
@@ -236,7 +215,10 @@ function handleTouchEnd(event: React.TouchEvent<HTMLDivElement>) {
         <div className="hidden md:block">
           <ProjectPreview
             key={`next-${nextProject.title}`}
-            project={nextProject}
+            project={{
+              ...nextProject,
+              title: translations.projects.items[nextIndex].title,
+            }}
             variant="side"
             direction={direction}
           />
@@ -245,49 +227,44 @@ function handleTouchEnd(event: React.TouchEvent<HTMLDivElement>) {
         {/* Seta direita */}
         <div
           className="
-            absolute
-            right-1
-            top-1/2
-            z-30
-            -translate-y-1/2
-
-            md:right-0
-            lg:-right-4
-          "
+          absolute
+          right-1
+          top-1/2
+          z-30
+          -translate-y-1/2
+          md:right-0
+          lg:-right-4
+        "
         >
           <ButtonRight onClick={handleNext} />
         </div>
       </div>
 
       {/* =========================
-          INFORMAÇÕES
-          ========================= */}
+        INFORMAÇÕES
+        ========================= */}
       <ProjectInfo
         key={currentProject.title}
-        project={currentProject}
+        project={currentProjectTranslated}
       />
 
       {/* =========================
-          INDICADORES
-          ========================= */}
+        INDICADORES
+        ========================= */}
       <div className="mt-6 flex justify-center gap-3">
         {data.map((project, index) => (
           <button
             key={project.title}
             onClick={() => handleSelect(index)}
-            aria-label={`Go to ${project.title}`}
+            aria-label={`Go to ${translations.projects.items[index].title}`}
             className={`
-              h-3
-              rounded-full
-              transition-all
-              duration-300
+            h-3
+            rounded-full
+            transition-all
+            duration-300
 
-              ${
-                index === activeIndex
-                  ? "w-12 bg-[#ff2f3f]"
-                  : "w-8 bg-[#8f1111]"
-              }
-            `}
+            ${index === activeIndex ? "w-12 bg-[#ff2f3f]" : "w-8 bg-[#8f1111]"}
+          `}
           />
         ))}
       </div>

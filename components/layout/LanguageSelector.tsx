@@ -10,10 +10,6 @@ export default function LanguageSelector() {
   const [open, setOpen] = useState(false);
   const { language, setLanguage } = useLanguage();
 
-  function selectLanguage(value: "en" | "pt") {
-    setLanguage(value);
-    setOpen(false);
-  }
   function toggleLanguage() {
     setLanguage(language === "en" ? "pt" : "en");
     setOpen(false);
@@ -63,7 +59,7 @@ export default function LanguageSelector() {
             "
           >
             <button
-              onClick={() => selectLanguage("en")}
+              onClick={() => setLanguage("en")}
               className="
                 rounded-lg px-3 py-2
                 text-left font-mono text-xs
@@ -75,7 +71,7 @@ export default function LanguageSelector() {
             </button>
 
             <button
-              onClick={() => selectLanguage("pt")}
+              onClick={() => setLanguage("pt")}
               className="
                 rounded-lg px-3 py-2
                 text-left font-mono text-xs

@@ -1,10 +1,15 @@
+"use client";
+
+import { useLanguage } from "@/hooks/useLanguage";
+
 export default function Hero () {
+    const { translations } = useLanguage();
   return (
     <section className="flex w-full md:w-1/2 flex-col items-end px-14 pt-20 ">
       <div className="flex flex-col w-auto items-center justify-center gap-2">
         <p className="font-mono text-base text-[#ff2f3f]">
-    Hi my name is
-  </p>
+          {translations.hero.greeting}
+        </p>
 
   <div className="relative">
     <h2 className="font-mono text-2xl text-[#ff2f3f]">
@@ -22,7 +27,7 @@ export default function Hero () {
         drop-shadow-[3px_3px_0px_#8f1111]
       "
     >
-      Pietro Vito
+      {translations.hero.title}
     </h1>
 
     <div className="flex items-center justify-between w-full xl:w-5/6">
@@ -36,7 +41,7 @@ export default function Hero () {
           drop-shadow-[2px_2px_0px_#ff2f3f]
         "
       >
-        I DO SOME THINGS ON WEB
+         {translations.hero.subtitle}
       </h2>
 
       <h2 className="font-mono text-2xl text-[#ff2f3f]">
@@ -56,8 +61,7 @@ export default function Hero () {
       text-[#ff2f3f]
     "
   >
-    Full-Stack Web Developer, constantly improving my skills and bringing my
-    best to every project. Take a look at my work.
+    {translations.hero.description}
   </p>
 
   <div className="w-full flex items-center justify-center">
@@ -80,7 +84,7 @@ export default function Hero () {
       hover:text-[#fff9ee]
     "
   >
-    Let&apos;s Work!
+    {translations.hero.button}
   </button>
   </div>
       </div>

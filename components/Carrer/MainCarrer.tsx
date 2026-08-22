@@ -1,82 +1,11 @@
+"use client";
+
+import { useLanguage } from "@/hooks/useLanguage";
+
 export default function MainCarrer() {
-  const experiences = [
-    {
-      role: "Full-Stack Developer",
-      company: "Academic Startup Project",
-      period: "2025 — Present",
-      description:
-        "Full-stack system development using .NET, React.js, MySQL and MongoDB in an academic startup simulation.",
-      highlights: [
-        "REST APIs with C# and .NET",
-        "SQL and NoSQL database integration",
-        "Frontend development with React.js",
-        "Technical leadership using Scrum/Kanban",
-      ],
-    },
-    {
-      role: "Automation & Video Editing",
-      company: "Freelancer",
-      period: "2022 — Present",
-      description:
-        "Development of Python automations to optimize video editing workflows and reduce repetitive manual tasks.",
-      highlights: [
-        "Process automation with PyAutoGUI",
-        "Automatic file organization",
-        "Reduced operational time from ~2h/day to ~30min",
-        "Contributed to channels with 1M+ monthly views",
-      ],
-    },
-  ];
+  const { translations } = useLanguage();
 
-  const education = [
-    {
-      course: "Software Engineering",
-      institution: "UNISAGRADO",
-      period: "2025 — 2028",
-    },
-    {
-      course: "Multiplatform Software Development",
-      institution: "FATEC",
-      period: "2025 — 2027",
-    },
-    {
-      course: "Systems Analysis and Development",
-      institution: "SENAI Jaú",
-      period: "2023 — 2024",
-    },
-  ];
-
-  const skills = [
-    "React.js",
-    "Next.js",
-    "JavaScript",
-    "TypeScript",
-    "Tailwind CSS",
-    "Bootstrap",
-    "HTML5",
-    "CSS3",
-    "C#",
-    ".NET",
-    "ASP.NET Core",
-    "REST APIs",
-    "SQL",
-    "MongoDB",
-    "Git",
-    "GitHub",
-    "Three.js",
-  ];
-
-  const languages = [
-    "English — Advanced",
-    "Portuguese — Native",
-  ];
-
-  const certifications = [
-    "Software Development — UNISAGRADO",
-    "Systems Analysis and Development — SENAI",
-    "C# and .NET — Rocketseat",
-    "English B2 — TOEIC",
-  ];
+  const career = translations.career;
 
   return (
     <section
@@ -107,7 +36,7 @@ export default function MainCarrer() {
             md:text-6xl
           "
         >
-          Career:
+          {career.title}
         </h2>
 
         <p
@@ -119,11 +48,11 @@ export default function MainCarrer() {
             md:text-base
           "
         >
-          // My professional journey, education and skills.
+          {career.description}
         </p>
       </div>
 
-      {/* EXPERIENCE + EDUCATION */}
+      {/* Experience + Education */}
       <div
         className="
           grid
@@ -158,113 +87,118 @@ export default function MainCarrer() {
                 text-[#ff2f3f]
               "
             >
-              Experience
+              {career.experience.title}
             </h3>
           </div>
 
           <div className="space-y-8 p-6">
-            {experiences.map((experience, index) => (
-              <article
-                key={experience.role}
-                className="
-                  relative
-                  border-l-2
-                  border-[#ff2f3f]/50
-                  pl-6
-                "
-              >
-                {/* marcador */}
-                <span
+            {career.experience.items.map(
+              (experience, index) => (
+                <article
+                  key={experience.role}
                   className="
-                    absolute
-                    -left-[7px]
-                    top-1
-                    h-3
-                    w-3
-                    bg-[#ff2f3f]
-                  "
-                />
-
-                <p
-                  className="
-                    font-mono
-                    text-xs
-                    text-[#ff2f3f]
+                    relative
+                    border-l-2
+                    border-[#ff2f3f]/50
+                    pl-6
                   "
                 >
-                  0{index + 1}
-                </p>
+                  {/* marcador */}
+                  <span
+                    className="
+                      absolute
+                      -left-[7px]
+                      top-1
+                      h-3
+                      w-3
+                      bg-[#ff2f3f]
+                    "
+                  />
 
-                <h4
-                  className="
-                    mt-2
-                    font-mono
-                    text-xl
-                    font-bold
-                    text-[#8f1111]
-                    dark:text-[#ff2f3f]
-                  "
-                >
-                  {experience.role}
-                </h4>
+                  <p
+                    className="
+                      font-mono
+                      text-xs
+                      text-[#ff2f3f]
+                    "
+                  >
+                    0{index + 1}
+                  </p>
 
-                <p
-                  className="
-                    mt-1
-                    font-mono
-                    text-sm
-                    text-[#ff2f3f]
-                  "
-                >
-                  {experience.company}
-                </p>
+                  <h4
+                    className="
+                      mt-2
+                      font-mono
+                      text-xl
+                      font-bold
+                      text-[#8f1111]
+                      dark:text-[#ff2f3f]
+                    "
+                  >
+                    {experience.role}
+                  </h4>
 
-                <p
-                  className="
-                    mt-1
-                    font-mono
-                    text-xs
-                    text-[#8f1111]/70
-                    dark:text-[#fff9ee]/60
-                  "
-                >
-                  {experience.period}
-                </p>
+                  <p
+                    className="
+                      mt-1
+                      font-mono
+                      text-sm
+                      text-[#ff2f3f]
+                    "
+                  >
+                    {experience.company}
+                  </p>
 
-                <p
-                  className="
-                    mt-4
-                    font-mono
-                    text-sm
-                    leading-relaxed
-                    text-[#8f1111]
-                    dark:text-[#fff9ee]
-                  "
-                >
-                  {experience.description}
-                </p>
+                  <p
+                    className="
+                      mt-1
+                      font-mono
+                      text-xs
+                      text-[#8f1111]/70
+                      dark:text-[#fff9ee]/60
+                    "
+                  >
+                    {experience.period}
+                  </p>
 
-                <ul
-                  className="
-                    mt-4
-                    space-y-2
-                    font-mono
-                    text-xs
-                    text-[#8f1111]
-                    dark:text-[#fff9ee]/80
-                  "
-                >
-                  {experience.highlights.map((highlight) => (
-                    <li key={highlight}>
-                      <span className="mr-2 text-[#ff2f3f]">
-                        &gt;
-                      </span>
-                      {highlight}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
+                  <p
+                    className="
+                      mt-4
+                      font-mono
+                      text-sm
+                      leading-relaxed
+                      text-[#8f1111]
+                      dark:text-[#fff9ee]
+                    "
+                  >
+                    {experience.description}
+                  </p>
+
+                  <ul
+                    className="
+                      mt-4
+                      space-y-2
+                      font-mono
+                      text-xs
+                      text-[#8f1111]
+                      dark:text-[#fff9ee]/80
+                    "
+                  >
+                    {experience.highlights.map(
+                      (highlight) => (
+                        <li key={highlight}>
+                          <span className="mr-2 text-[#ff2f3f]">
+                            &gt;
+                          </span>
+
+                          {highlight}
+                        </li>
+                      )
+                    )}
+                  </ul>
+                </article>
+              )
+            )}
           </div>
         </div>
 
@@ -293,79 +227,81 @@ export default function MainCarrer() {
                 text-[#ff2f3f]
               "
             >
-              Education
+              {career.education.title}
             </h3>
           </div>
 
           <div className="space-y-8 p-6">
-            {education.map((item, index) => (
-              <article
-                key={item.course}
-                className="
-                  relative
-                  border-l-2
-                  border-[#ff2f3f]/50
-                  pl-6
-                "
-              >
-                <span
+            {career.education.items.map(
+              (item, index) => (
+                <article
+                  key={item.course}
                   className="
-                    absolute
-                    -left-[7px]
-                    top-1
-                    h-3
-                    w-3
-                    bg-[#ff2f3f]
-                  "
-                />
-
-                <p
-                  className="
-                    font-mono
-                    text-xs
-                    text-[#ff2f3f]
+                    relative
+                    border-l-2
+                    border-[#ff2f3f]/50
+                    pl-6
                   "
                 >
-                  0{index + 1}
-                </p>
+                  <span
+                    className="
+                      absolute
+                      -left-[7px]
+                      top-1
+                      h-3
+                      w-3
+                      bg-[#ff2f3f]
+                    "
+                  />
 
-                <h4
-                  className="
-                    mt-2
-                    font-mono
-                    text-xl
-                    font-bold
-                    text-[#8f1111]
-                    dark:text-[#ff2f3f]
-                  "
-                >
-                  {item.course}
-                </h4>
+                  <p
+                    className="
+                      font-mono
+                      text-xs
+                      text-[#ff2f3f]
+                    "
+                  >
+                    0{index + 1}
+                  </p>
 
-                <p
-                  className="
-                    mt-1
-                    font-mono
-                    text-sm
-                    text-[#ff2f3f]
-                  "
-                >
-                  {item.institution}
-                </p>
+                  <h4
+                    className="
+                      mt-2
+                      font-mono
+                      text-xl
+                      font-bold
+                      text-[#8f1111]
+                      dark:text-[#ff2f3f]
+                    "
+                  >
+                    {item.course}
+                  </h4>
 
-                <p
-                  className="
-                    mt-1
-                    font-mono
-                    text-xs
-                    text-[#8f1111]/70
-                    dark:text-[#fff9ee]/60
-                  "
-                >
-                  {item.period}
-                </p>
-              </article>
-            ))}
+                  <p
+                    className="
+                      mt-1
+                      font-mono
+                      text-sm
+                      text-[#ff2f3f]
+                    "
+                  >
+                    {item.institution}
+                  </p>
+
+                  <p
+                    className="
+                      mt-1
+                      font-mono
+                      text-xs
+                      text-[#8f1111]/70
+                      dark:text-[#fff9ee]/60
+                    "
+                  >
+                    {item.period}
+                  </p>
+                </article>
+              )
+            )}
           </div>
         </div>
       </div>
@@ -396,7 +332,7 @@ export default function MainCarrer() {
               text-[#ff2f3f]
             "
           >
-            Hard Skills
+            {career.skills.title}
           </h3>
         </div>
 
@@ -410,7 +346,7 @@ export default function MainCarrer() {
             md:grid-cols-4
           "
         >
-          {skills.map((skill) => (
+          {career.skills.items.map((skill) => (
             <div
               key={skill}
               className="
@@ -430,7 +366,9 @@ export default function MainCarrer() {
               "
             >
               {skill}
-              <span className="text-[#ff2f3f]"> _</span>
+              <span className="text-[#ff2f3f]">
+                {" _"}
+              </span>
             </div>
           ))}
         </div>
@@ -459,24 +397,28 @@ export default function MainCarrer() {
                 text-[#ff2f3f]
               "
             >
-              Languages
+              {career.languages.title}
             </h4>
 
             <div className="space-y-2">
-              {languages.map((language) => (
-                <p
-                  key={language}
-                  className="
-                    font-mono
-                    text-sm
-                    text-[#8f1111]
-                    dark:text-[#fff9ee]
-                  "
-                >
-                  <span className="text-[#ff2f3f]">&gt;</span>{" "}
-                  {language}
-                </p>
-              ))}
+              {career.languages.items.map(
+                (language) => (
+                  <p
+                    key={language}
+                    className="
+                      font-mono
+                      text-sm
+                      text-[#8f1111]
+                      dark:text-[#fff9ee]
+                    "
+                  >
+                    <span className="text-[#ff2f3f]">
+                      &gt;
+                    </span>{" "}
+                    {language}
+                  </p>
+                )
+              )}
             </div>
           </div>
 
@@ -492,24 +434,28 @@ export default function MainCarrer() {
                 text-[#ff2f3f]
               "
             >
-              Certifications
+              {career.certifications.title}
             </h4>
 
             <div className="space-y-2">
-              {certifications.map((certification) => (
-                <p
-                  key={certification}
-                  className="
-                    font-mono
-                    text-sm
-                    text-[#8f1111]
-                    dark:text-[#fff9ee]
-                  "
-                >
-                  <span className="text-[#ff2f3f]">&gt;</span>{" "}
-                  {certification}
-                </p>
-              ))}
+              {career.certifications.items.map(
+                (certification) => (
+                  <p
+                    key={certification}
+                    className="
+                      font-mono
+                      text-sm
+                      text-[#8f1111]
+                      dark:text-[#fff9ee]
+                    "
+                  >
+                    <span className="text-[#ff2f3f]">
+                      &gt;
+                    </span>{" "}
+                    {certification}
+                  </p>
+                )
+              )}
             </div>
           </div>
         </div>

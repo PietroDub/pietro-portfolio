@@ -1,9 +1,13 @@
+"use client";
+
 import Image from "next/image";
 
 import ThemeToggle from "../layout/ThemeToogle";
 import LanguageSelector from "../layout/LanguageSelector";
+import { useLanguage } from "@/hooks/useLanguage";
 
 export default function Navbar() {
+  const { translations } = useLanguage();
   return (
     <header
   className="
@@ -42,7 +46,7 @@ export default function Navbar() {
           hover:opacity-70
         "
       >
-        //About Me
+        //{translations.nav.about}
       </a>
 
       <a
@@ -54,7 +58,7 @@ export default function Navbar() {
           hover:opacity-70
         "
       >
-        //Projects
+        //{translations.nav.projects}
       </a>
 
       <a
@@ -66,7 +70,7 @@ export default function Navbar() {
           hover:opacity-70
         "
       >
-        //Career
+        //{translations.nav.career}
       </a>
 
       <a
@@ -78,7 +82,7 @@ export default function Navbar() {
           hover:opacity-70
         "
       >
-        //Contact
+        //{translations.nav.contact}
       </a>
     </div>
   </nav>
